@@ -1,0 +1,7 @@
+.store-profile-img {
+  color: rgb(245, 197, 197);
+  height: 60vh;
+  width: 100%;
+  position: relative;
+  background: url("../../assets/new.png") no-repeat center center/cover;
+}
