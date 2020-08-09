@@ -3,13 +3,14 @@
   margin-top: auto;
   margin-left: auto;
   align-content: flex-end;
-  background: #d01d3f;
+  background: #ed3137;
   color: #fff;
   width: 44px;
   height: 44px;
   text-align: center;
   line-height: 1;
   font-size: 16px;
+  border: #fff 0.5px solid;
   border-radius: 50%;
   right: 15px;
   bottom: 15px;

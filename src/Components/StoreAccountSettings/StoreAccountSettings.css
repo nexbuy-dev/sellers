@@ -1,0 +1,41 @@
+#settings ul {
+  list-style: none;
+}
+
+#settings li {
+  margin: 20px 10px;
+}
+
+#settings .card {
+  padding: 2rem 2rem;
+  -webkit-box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19),
+    0 13px 25px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+}
+
+#settings span {
+  color: #ed3137 !important;
+  font-weight: bold;
+}
+
+#settings span:hover {
+  background-color: rgba(255, 192, 203, 0.8) !important;
+}
+
+#settings span.active {
+  background-color: #ed3137 !important;
+  color: white !important;
+}
+
+#settings a {
+  color: #ed3137 !important;
+  font-weight: bold;
+}
+#settings a:hover {
+  background-color: rgba(255, 192, 203, 0.8) !important;
+}
+
+#settings a.active {
+  background-color: #ed3137 !important;
+  color: white !important;
+}

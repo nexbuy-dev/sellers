@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import img_home from "../../assets/img/ic_home.png";
+import img_profile from "../../assets/img/ic_profile.png";
 
 class StoreNav extends Component {
   constructor(props) {
@@ -8,26 +11,25 @@ class StoreNav extends Component {
 
   render() {
     return (
-      <div className="">
-        <Navbar bg="light" expand="lg">
+      <div id="navbar">
+        <Navbar collapseOnSelect bg="light" expand="lg" fixed="top">
           <div className="container">
-            <Navbar.Brand href="/">Belvers Clothiers</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/">
+              Belvers Clothiers
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="/">
-                  <i className="fa fa-home mr-1"></i>Home
+                <Nav.Link as={Link} to="/" eventKey={2}>
+                  <img src={img_home} alt="" className="mr-2" />
+                  Home
                 </Nav.Link>
-
-                <Nav.Link href="/storeprofile">
-                  <i className="fa fa-user mr-1"></i>profile
+                <Nav.Link as={Link} to="/about" eventKey={1}>
+                  About
                 </Nav.Link>
-
-                <Nav.Link
-                  href="#"
-                  onClick={() => this.props.onRouteChange("user")}
-                >
-                  User mode
+                <Nav.Link as={Link} to="/profile" eventKey={3}>
+                  <img src={img_profile} alt="" className="mr-2" />
+                  profile
                 </Nav.Link>
               </Nav>
               <Form inline>
@@ -45,4 +47,5 @@ class StoreNav extends Component {
     );
   }
 }
+
 export default StoreNav;

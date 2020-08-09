@@ -7,10 +7,21 @@
 
 body {
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .App {
-  background-color: #fff;
+  background-color: rgba(243, 243, 243, 0.5);
+}
+
+.btn-danger {
+  margin-right: 2rem;
+  color: #fff !important;
+  background-color: #ed3137 !important;
+}
+
+.btn-outline-danger:hover {
+  background-color: rgb(237, 49, 55, 0.7) !important;
 }
 
 @media screen and (max-width: 991px) {
@@ -69,3 +80,10 @@ body {
     opacity: 0;
   }
 }
+
+/* overide toastify */
+.Toastify__toast {
+  border-radius: 7px !important;
+}
+
+/* Tables */

@@ -1,0 +1,27 @@
+#wish-list .card {
+  overflow: hidden;
+  padding: 0 0 !important;
+  border-radius: 10px !important;
+  cursor: pointer;
+  transition: 0.7s;
+}
+
+#wish-list .category-heading {
+  background-color: #ed3137;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  z-index: 1;
+}
+@media screen and (max-width: 600px) {
+  #wish-list .category-heading {
+    font-size: 0.7rem;
+  }
+}
+
+#wish-list .col-6,
+#wish-list .col-md-3,
+#wish-list .col-lg-2 {
+  padding-left: 7px !important;
+  padding-right: 7px !important;
+}

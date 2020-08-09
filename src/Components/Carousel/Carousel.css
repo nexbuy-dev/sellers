@@ -1,69 +1,29 @@
-.Carousel img {
-  width: 100vw;
-  height: 58vw;
+#carousel {
+  margin-top: 3.7rem;
+  overflow-x: hidden;
 }
 
-.carousel-item:before {
+#carousel .carousel img {
+  width: 100vw;
+  height: 50vw;
+}
+
+#carousel .carousel-item:before {
   content: "";
-  background-color: rgba(0, 0, 0, 0.4);
+
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
 }
-.carousel-content {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-}
-
-.carousel-content h3 {
-  color: #fff;
-  margin-bottom: 30px;
-  font-size: 48px;
-  font-weight: 700;
-}
-
-.carousel-content p {
-  width: 80%;
-  -webkit-animation-delay: 0.4s;
-  animation-delay: 0.4s;
-  margin: 0 auto 30px auto;
-  color: #fff;
-}
-
-.button {
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 12px 32px;
-  border-radius: 4px;
-  transition: 0.5s;
-  line-height: 1;
-  margin: 10px;
-  color: #fff;
-  -webkit-animation-delay: 0.8s;
-  animation-delay: 0.8s;
-  border: 2px solid #d01d3f;
-  cursor: pointer;
-}
-
-.carousel-indicators {
-  z-index: 1 !important;
-}
-
-.carousel-content button:hover {
-  background: #d01d3f;
-  color: #fff;
-  text-decoration: none;
-}
 
 @media (max-width: 768px) {
-  .carousel-content h3 {
-    font-size: 28px;
+  #carousel {
+    margin-top: 3.5rem;
+  }
+
+  #carousel .carousel img {
+    height: 65vw;
   }
 }

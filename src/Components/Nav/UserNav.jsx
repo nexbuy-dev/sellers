@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
-import { Link } from "react-scroll";
-import nexbuy from "../../assets/nexbuy.svg";
+import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import img_home from "../../assets/img/ic_home.png";
+import img_profile from "../../assets/img/ic_profile.png";
+import img_cart from "../../assets/img/ic_cart.png";
+import "./nav.css";
+import { Link } from "react-router-dom";
 
 class UserNav extends Component {
   constructor(props) {
@@ -17,77 +13,30 @@ class UserNav extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar bg="light" expand="lg">
+      <div id="navbar" className="user-nav">
+        <Navbar collapseOnSelect bg="light" expand="lg" fixed="top">
           <div className="container">
-            <Navbar.Brand href="/">Belvers Clothiers</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/">
+              Belvers Clothiers
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="/">
-                  <i className="fa fa-home mr-1"></i>Home
+                <Nav.Link as={Link} to="/" eventKey={2}>
+                  <img src={img_home} alt="" className="mr-2" /> Home
                 </Nav.Link>
-                <Nav.Link href="/cart">
-                  {" "}
-                  <img
-                    src={nexbuy}
-                    alt=""
-                    style={{ height: "30px", width: "30px" }}
-                  ></img>
+
+                <Nav.Link as={Link} to="/about" eventKey={3}>
+                  About
+                </Nav.Link>
+
+                <Nav.Link as={Link} to="/cart" eventKey={4}>
+                  <img src={img_cart} alt="" className="mr-2" />
                   Cart
                 </Nav.Link>
-                <NavDropdown title="Categories" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#">
-                    <Link
-                      to="female-wears"
-                      smooth={true}
-                      duration={1000}
-                      style={{ cursor: "pointer" }}
-                    >
-                      {" "}
-                      Female wears{" "}
-                    </Link>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
-                    <Link
-                      to="male-wears"
-                      smooth={true}
-                      duration={1000}
-                      style={{ cursor: "pointer" }}
-                    >
-                      Male wears{" "}
-                    </Link>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
-                    <Link
-                      to="sneakers"
-                      smooth={true}
-                      duration={1000}
-                      style={{ cursor: "pointer" }}
-                    >
-                      Sneakers
-                    </Link>
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
-                    <Link
-                      to="special-offers"
-                      smooth={true}
-                      duration={1000}
-                      style={{ cursor: "pointer" }}
-                    >
-                      Special offers{" "}
-                    </Link>
-                  </NavDropdown.Item>
-                </NavDropdown>
-                <Nav.Link href="/userprofile">
-                  <i className="fa fa-user mr-1"></i>profile
-                </Nav.Link>
-                <Nav.Link
-                  href="#"
-                  onClick={() => this.props.onRouteChange("visitor")}
-                >
-                  Visitor mode
+
+                <Nav.Link as={Link} to="/profile" eventKey={5}>
+                  <img src={img_profile} alt="" className="mr-2" /> profile
                 </Nav.Link>
               </Nav>
               <Form inline>

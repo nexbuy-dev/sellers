@@ -1,14 +1,23 @@
 import React from "react";
-import "./UserProfile.css";
-import Footer from "../../Components/Footer/Footer";
-import img from "../../assets/oluwavicky.jpg";
+import { Link } from "react-router-dom";
+import WishList from "../../Components/WishList/WishList";
+import AddModal from "./Modal";
+import UserOrders from "../../Components/Orders/UserOrders";
+import Transactions from "../../Components/Transactions/Transactions";
+import { connect } from "react-redux";
+import { signOut } from "../../Redux/Actions/authActions";
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       route: "",
+      addModalShow: false,
     };
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   Orders = () => {
@@ -23,20 +32,31 @@ class UserProfile extends React.Component {
     this.setState({ route: "wishlist" });
   };
 
+  onEditProfile = () => {
+    this.setState({ addModalShow: true });
+  };
+
   render() {
+    let addModalClose = () => this.setState({ addModalShow: false });
+    const { profile, auth } = this.props;
+
     return (
       <div>
         <div className="profile">
           <div className="profile-container">
             <div className="profile-header">
               <div className="profile-img">
-                <img src={img} alt="" width="200" />
+                <img src={`${profile.imageUrl}`} alt="" width="200" />
               </div>
               <div className="profile-nav-info">
-                <h3 className="user-name">Oluwavicky</h3>
+                <h3 className="user-name">
+                  {profile.firstName} {profile.lastName}
+                </h3>
                 <div className="address">
-                  <p className="state">Lagos,</p>
-                  <span className="country">Nigeria.</span>
+                  <p className="state">
+                    {profile.address}, {profile.city}
+                  </p>
+                  <span className="country">{profile.state}, Nigeria.</span>
                 </div>
               </div>
             </div>
@@ -45,28 +65,44 @@ class UserProfile extends React.Component {
                 <div className="profile-side">
                   <p className="mobile-no">
                     <i className="fa fa-phone"></i>
-                    +2348184433609
+                    {profile.phone}
                   </p>
                   <p className="user-mail">
                     <i className="fa fa-envelope"></i>
-                    tannaye@gmail.com
+                    {auth.email}
                   </p>
-                  <div className="user-bio">
+                  {/* <div className="user-bio">
                     <h5>Interests</h5>
                     <p className="bio">
                       Phones and Tables, Gaming, Computing, Male Wears.
                     </p>
-                  </div>
+                  </div> */}
                   <div className="profile-btn">
                     <button className="chatbtn">
-                      <i className="fa fa-eye mr-2"></i>View cart
+                      <i className="fa fa-eye mr-2"></i>
+                      <Link to="/cart" style={{ color: "#fff" }}>
+                        View cart
+                      </Link>
                     </button>
-                    <button className="createbtn">
+                    <button className="createbtn" onClick={this.onEditProfile}>
                       {" "}
-                      <i className="fa fa-settings mr-2"></i>
+                      <i className="fa fa-cog mr-2"></i>
                       Edit profile
                     </button>
+                    <AddModal
+                      show={this.state.addModalShow}
+                      onHide={addModalClose}
+                    />
                   </div>
+                </div>
+
+                <div className="profile-btn">
+                  <button
+                    className="chatbtn col-12"
+                    onClick={this.props.signOut}
+                  >
+                    <i className="fa fa-sign-out mr-3"></i> Logout{" "}
+                  </button>
                 </div>
               </div>
               <div className="right-side">
@@ -94,24 +130,15 @@ class UserProfile extends React.Component {
                   <div className="profile-posts tab">
                     {this.state.route === "history" ? (
                       <div>
-                        <h1>Transaction History</h1>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Rem soluta rerum cumque aliquid pariatur optio
-                          mollitia accusantium quod odit esse, eaque vero
-                          reprehenderit ad quae omnis a totam ex voluptatem et
-                          sequi adipisci aliquam voluptates deserunt! Sequi non
-                          dolores animi!
-                        </p>
+                        <Transactions />
                       </div>
                     ) : this.state.route === "wishlist" ? (
                       <div className="">
-                        <h1>Wish List</h1>
-                        <p>Comming soon...</p>
+                        <WishList />
                       </div>
                     ) : (
                       <div className="">
-                        <h1>My orders</h1>
+                        <UserOrders />
                       </div>
                     )}
                   </div>
@@ -120,11 +147,21 @@ class UserProfile extends React.Component {
             </div>
           </div>
         </div>
-
-        <Footer />
       </div>
     );
   }
 }
 
-export default UserProfile;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

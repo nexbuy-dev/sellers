@@ -1,0 +1,15 @@
+#navbar img {
+  width: 20px;
+  height: 20px;
+}
+
+#navbar a {
+  color: rgb(105, 103, 103);
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+#navbar a:hover {
+  text-decoration: none;
+}

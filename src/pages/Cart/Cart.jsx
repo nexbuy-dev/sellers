@@ -1,108 +1,111 @@
 import React, { Component } from "react";
 import "./Cart.css";
-import nike from "../../assets/nike.jpg";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import firebase from "../../Firebase/Firebase";
+import {
+  deleteCartItem,
+  deleteCartItems,
+} from "../../Redux/Actions/userActions";
+import { PaystackButton } from "react-paystack";
+import { toast } from "react-toastify";
+
+const publicKey = "pk_test_7ef0929bad6cd1b77c44d66f876cc049e8be89d9";
 
 class Cart extends Component {
+  state = {
+    email: "iwatannayevictor@gmail.com",
+    amount: "50000",
+    phone: "0298736430498",
+  };
+
+  setParameters = ({ email, phone }) => {};
+
+  deleteCartItem = (id) => {
+    const user = this.props.user.id;
+    this.props.deleteCartItem({ id, user });
+  };
+
+  deleteCartItems = () => {
+    const user = this.props.user.id;
+    this.props.deleteCartItems(user);
+  };
+
   render() {
+    const carts = this.props.carts;
+    const email = this.state.email;
+    const amount = this.state.amount;
+    const phone = this.state.phone;
+    const user = this.props.user.id;
+
+    const componentProps = {
+      email,
+      amount,
+      metadata: {
+        phone,
+      },
+      publicKey,
+      text: "Pay Now",
+      onSuccess: () => {
+        deleteCartItems(user);
+        toast.success("Your order has been sent successfully");
+      },
+    };
+
     return (
       <div id="cart">
         <div id="container" className="container">
           <table>
             <tbody>
-              <tr className="p">
-                <td className="image">
-                  <img src={nike} alt="" />
-                </td>
-                <td className="name">iPod touch</td>
-                <td className="price">$299.99</td>
-                <td className="amount">
-                  <input type="number" defaultValue="1" min="1" />
-                </td>
-                <td className="pricesubtotal">$299.99</td>
-                <td className="remove ">
-                  <button className="btn btn-danger fa fa-trash"></button>
-                </td>
-              </tr>
-              <tr className="p">
-                <td className="image">
-                  <img src={nike} alt="" />
-                </td>
-                <td className="name">Pack of 5 pens</td>
-                <td className="price">$4.99</td>
-                <td className="amount">
-                  <input type="number" defaultValue="3" min="1" />
-                </td>
-                <td className="pricesubtotal">$4.99</td>
-                <td className="remove">
-                  <button className="btn btn-danger fa fa-trash"></button>
-                </td>
-              </tr>
-              <tr className="p">
-                <td className="image">
-                  <img src={nike} alt="" />
-                </td>
-                <td className="name">Microsoft Surface</td>
-                <td className="price">$599.99</td>
-                <td className="amount">
-                  <input type="number" defaultValue="1" min="1" />
-                </td>
-                <td className="pricesubtotal">$599.99</td>
-                <td className="remove">
-                  <button className="btn btn-danger fa fa-trash"></button>
-                </td>
-              </tr>
-              <tr className="p">
-                <td className="image">
-                  <img src="http://www.rinogualtieri.it/images/libri1.jpg" />
-                </td>
-                <td className="name">Books</td>
-                <td className="price">$29.99</td>
-                <td className="amount">
-                  <input type="number" defaultValue="5" min="1" />
-                </td>
-                <td className="pricesubtotal">$29.99</td>
-                <td className="remove">
-                  <button className="btn btn-danger fa fa-trash"></button>
-                </td>
-              </tr>
-              <tr className="p">
-                <td className="image">
-                  <img src="https://image.guim.co.uk/sys-images/Admin/BkFill/Default_image_group/2013/2/19/1361294379900/Cup-cakes-010.jpg" />
-                </td>
-                <td className="name">Cupcakes</td>
-                <td className="price">$0.99</td>
-                <td className="amount">
-                  <input type="number" defaultValue="20" min="1" />
-                </td>
-                <td className="pricesubtotal">$0.99</td>
-                <td className="remove">
-                  <button className="btn btn-danger fa fa-trash"></button>
-                </td>
-              </tr>
+              {carts &&
+                carts.map((cart) => {
+                  return (
+                    <tr className="p" key={cart.id}>
+                      <td className="image">
+                        <img src={`${cart.imageUrl}`} alt="" />
+                      </td>
+                      <td className="name">{cart.name}</td>
+                      <td className="price">{cart.price}</td>
+                      <td className="amount">
+                        {cart.quantity}
+                        {/* <input type="number" defaultValue="1" min="1" /> */}
+                      </td>
+                      <td className="remove ">
+                        <button
+                          className="btn btn-danger fa fa-trash"
+                          onClick={() => this.deleteCartItems()}
+                        ></button>
+                      </td>
+                    </tr>
+                  );
+                })}
 
               <tr>
                 <td> </td>
                 <td> </td>
                 <td> </td>
-                <td>Subtotal:</td>
-                <td className="totalpricesubtotal">$1000.99</td>
+
                 <td> </td>
               </tr>
               <tr>
                 <td style={{ borderTop: "1px solid black" }} colSpan="6">
                   <br />
-                  With 5% sales tax <span className="taxval"></span> and{" "}
-                  <span className="shipping">10</span>$ shipping:
-                  <br />
+
                   <span className="big">
-                    Total: $<span className="realtotal">0</span>
+                    Total: $<span className="realtotal">500</span>
                   </span>
                 </td>
               </tr>
             </tbody>
           </table>
           <div id="checkout">
-            Checkout<span> &rarr;</span>
+            {/* <button className="btn btn-danger">Checkout</button> */}
+            <PaystackButton
+              className="btn btn-danger"
+              onClick={this.setParameters({})}
+              {...componentProps}
+            />
           </div>
         </div>
       </div>
@@ -110,4 +113,33 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+const mapStateToProps = (state) => {
+  console.log(state.firestore.ordered.carts);
+  return {
+    user: state.firebase.profile,
+    carts: state.firestore.ordered.carts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteCartItem: (id) => dispatch(deleteCartItem(id)),
+    deleteCartItems: (id) => dispatch(deleteCartItems(id)),
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect(() => {
+    var myUserId = firebase.auth().currentUser.uid;
+    return [
+      {
+        collection: "profiles",
+        doc: myUserId,
+        subcollections: [{ collection: "cart" }],
+        storeAs: "carts",
+      },
+      { collection: "products" },
+    ];
+  })
+)(Cart);

@@ -1,0 +1,17 @@
+#categories .card {
+  transition: 0.7s;
+  border-radius: 0 0 10px 10px !important;
+}
+
+#categories .card:hover {
+  box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+}
+
+#categories .category-heading {
+  background-color: #ed3137;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0 0 10px 10px !important;
+}

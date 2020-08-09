@@ -3,7 +3,8 @@
   overflow-x: hidden;
   padding-top: 90px;
   font-family: "poppins", sans-serif;
-  margin: 0 100px;
+  margin: 0 50px;
+  margin-bottom: 10rem;
 }
 
 .profile-header {
@@ -58,7 +59,7 @@
 .profile-option {
   width: 40px;
   height: 40px;
-  background: #d01d3f;
+  background: #ed3137;
   position: absolute;
   right: 50px;
   top: 50px;
@@ -78,11 +79,11 @@
 }
 
 .profile-option:hover .notification i {
-  color: #d01d3f;
+  color: #ed3137;
 }
 .profile-option:hover {
   background: #fff;
-  border: 1px solid #d01d3f;
+  border: 1px solid #ed3137;
 }
 
 .profile-option .notification .alert-message {
@@ -90,7 +91,7 @@
   top: -5px;
   right: -5px;
   background: #fff;
-  color: #d01d3f;
+  color: #ed3137;
   border: 1px solid;
   padding: 5px;
   border-radius: 50%;
@@ -123,7 +124,7 @@
 }
 
 .profile-side p i {
-  color: #d01d3f;
+  color: #ed3137;
   margin-right: 10px;
 }
 
@@ -136,7 +137,7 @@ button.createbtn {
   padding: 10px;
   width: 100%;
   border-radius: 3px;
-  background: #d01d3f;
+  background: #ed3137;
   font-size: 1rem;
   margin: 5px 2px;
   outline: none;
@@ -148,7 +149,7 @@ button.createbtn {
 
 button.chatbtn:hover,
 button.createbtn:hover {
-  background: rgba(288, 0, 78, 0.9);
+  background: rgba(237, 49, 55, 0.8);
 }
 .user-rating {
   display: flex;
@@ -171,7 +172,7 @@ button.createbtn:hover {
 
 .rate i {
   font-size: 0.9rem;
-  color: #d01d3f;
+  color: #ed3137;
 }
 
 .nav {
@@ -298,4 +299,12 @@ button.createbtn:hover {
       font-size: 0.7rem;
     }
   }
+}
+
+.variants {
+  display: inline;
+}
+
+.novariant:checked ~ .variants {
+  display: none;
 }
